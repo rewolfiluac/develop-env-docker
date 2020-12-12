@@ -1,7 +1,6 @@
 FROM nvidia/cuda:11.1-cudnn8-runtime-ubuntu18.04
 
 ENV DEBIAN_FRONTEND=noninteractive
-# TensorRTのバージョン指定
 ENV VERSION 7.2.1-1+cuda11.1
 
 RUN apt-get update \
