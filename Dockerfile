@@ -29,13 +29,13 @@ RUN export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/TensorRT-${TRT_VERSION}/l
 RUN rm -rf TensorRT-${TRT_VERSION}*
 
 # PyCUDAインストール
-RUN curl -OL https://files.pythonhosted.org/packages/46/61/47d3235a4c13eec5a5f03594ddb268f4858734e02980afbcd806e6242fa5/pycuda-2020.1.tar.gz \
-    tar xfz pycuda-2020.1.tar.gz \
-    cd pycuda-2020.1 \
-    python3.7 configure.py --cuda-root=/usr/local/cuda \
-    make install \
-    cd .. \
-    rm -rf pycuda-*
+RUN curl -OL https://files.pythonhosted.org/packages/46/61/47d3235a4c13eec5a5f03594ddb268f4858734e02980afbcd806e6242fa5/pycuda-2020.1.tar.gz
+RUN tar xfz pycuda-2020.1.tar.gz 
+RUN cd pycuda-2020.1 
+RUN python3.7 configure.py --cuda-root=/usr/local/cuda 
+RUN make install 
+RUN cd .. 
+RUN rm -rf pycuda-*
 
 # Pythonパッケージのインストール
 RUN curl -kL https://bootstrap.pypa.io/get-pip.py | sudo python3.7
