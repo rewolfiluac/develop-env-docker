@@ -10,5 +10,5 @@ docker build -t {image-name} .
 ```
 ## Dockerコンテナの実行
 ```
-docker run --itd --gpus all -p {port}:22 {image-name}
+docker run -itd --gpus all -p {port}:22 {image-name}
 ```

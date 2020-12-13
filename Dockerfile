@@ -41,10 +41,6 @@ RUN python3.7 -m pip install /usr/local/TensorRT-${TRT_VERSION}/python/tensorrt-
 ENV NVIDIA_VISIBLE_DEVICES all
 ENV NVIDIA_DRIVER_CAPABILITIES utility,compute
 
-# runしたときにSSH接続を始められるようにします。
-EXPOSE 22
-CMD ["/usr/sbin/sshd", "-D"]
-
 # sudo権限を持つ一般ユーザーを作成
 ENV USER dev
 ENV HOME /home/${USER}
@@ -57,6 +53,3 @@ RUN sed -i.bak "s#${HOME}:#${HOME}:${SHELL}#" /etc/passwd
 
 USER ${USER}
 WORKDIR ${HOME}
-
-
-
