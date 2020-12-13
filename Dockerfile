@@ -8,6 +8,7 @@ RUN apt-get update \
     sudo wget curl git openssh-server \
     # Python3.7用
     python3.7 python3.7-dev python3.7-distutils \
+    build-essential libssl-dev libffi-dev\
     # OpenCV-Python 用
     libopencv-dev libgl1-mesa-dev \
     # TensorRT用
@@ -17,6 +18,8 @@ RUN apt-get update \
     && apt-get -y clean \
     && rm -rf /var/lib/apt/lists/*
 
+RUN export LD_LIBRARY_PATH="/usr/local/cuda/lib64:$LD_LIBRARY_PATH"
+
 # TensorRTインストール
 ENV TRT_VERSION 7.2.1.6
 COPY TensorRT-${TRT_VERSION}.Ubuntu-18.04.x86_64-gnu.cuda-11.1.cudnn8.0.tar.gz ./
@@ -24,6 +27,15 @@ RUN tar xzvf TensorRT-${TRT_VERSION}*.tar.gz
 RUN cp -r TensorRT-${TRT_VERSION} /usr/local/
 RUN export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/TensorRT-${TRT_VERSION}/lib
 RUN rm -rf TensorRT-${TRT_VERSION}*
+
+# PyCUDAインストール
+RUN curl -OL https://files.pythonhosted.org/packages/46/61/47d3235a4c13eec5a5f03594ddb268f4858734e02980afbcd806e6242fa5/pycuda-2020.1.tar.gz \
+    tar xfz pycuda-2020.1.tar.gz \
+    cd pycuda-2020.1 \
+    python3.7 configure.py --cuda-root=/usr/local/cuda \
+    make install \
+    cd .. \
+    rm -rf pycuda-*
 
 # Pythonパッケージのインストール
 RUN curl -kL https://bootstrap.pypa.io/get-pip.py | sudo python3.7
