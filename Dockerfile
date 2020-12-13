@@ -5,7 +5,7 @@ ENV VERSION 7.2.1-1+cuda11.1
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-    sudo vi wget curl git openssh-server \
+    sudo wget curl git openssh-server \
     # Python3.7用
     python3.7 python3.7-dev python3.7-distutils \
     # OpenCV-Python 用
