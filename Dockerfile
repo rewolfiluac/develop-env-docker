@@ -37,6 +37,7 @@ RUN python3.7 -m pip install onnx==1.8.0
 RUN python3.7 -m pip install timm==0.3.2 torch_optimizer==0.0.1a17 addict==2.4.0
 RUN python3.7 -m pip install /usr/local/TensorRT-${TRT_VERSION}/python/tensorrt-${TRT_VERSION}-cp37-none-linux_x86_64.whl \
     /usr/local/TensorRT-${TRT_VERSION}/onnx_graphsurgeon/onnx_graphsurgeon-0.2.6-py2.py3-none-any.whl
+RUN python3.7 -m pip install hydra-core-1.0.4 --upgrade
 
 # PyCUDAインストール
 RUN curl -OL https://files.pythonhosted.org/packages/46/61/47d3235a4c13eec5a5f03594ddb268f4858734e02980afbcd806e6242fa5/pycuda-2020.1.tar.gz
