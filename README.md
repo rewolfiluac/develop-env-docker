@@ -10,5 +10,5 @@ docker build -t {image-name} .
 ```
 ## Dockerコンテナの実行
 ```
-docker run -itd --gpus all -p {port}:22 --shm-size 2g {image-name}
+docker run -itd --gpus all -p {port}:22 -p {port}:5000 --shm-size 2g {image-name}
 ```
