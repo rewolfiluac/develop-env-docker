@@ -15,6 +15,8 @@ RUN apt-get update \
     libnvinfer7=${VERSION} libnvonnxparsers7=${VERSION} libnvparsers7=${VERSION} \
     libnvinfer-plugin7=${VERSION} \
     python-libnvinfer=${VERSION} python3-libnvinfer=${VERSION} \
+    # その他
+    swig \
     && apt-get -y clean \
     && rm -rf /var/lib/apt/lists/*
 
