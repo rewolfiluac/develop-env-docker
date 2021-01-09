@@ -39,7 +39,7 @@ RUN python3.7 -m pip install onnx==1.8.0
 RUN python3.7 -m pip install timm==0.3.2 torch_optimizer==0.0.1a17 addict==2.4.0
 RUN python3.7 -m pip install /usr/local/TensorRT-${TRT_VERSION}/python/tensorrt-${TRT_VERSION}-cp37-none-linux_x86_64.whl \
     /usr/local/TensorRT-${TRT_VERSION}/onnx_graphsurgeon/onnx_graphsurgeon-0.2.6-py2.py3-none-any.whl
-RUN python3.7 -m pip install hydra-core==1.0.4 --upgrade
+# RUN python3.7 -m pip install hydra-core==1.0.4 --upgrade
 RUN python3.7 -m pip install flake8==3.8.4 autopep8==1.5.4
 
 # PyCUDAインストール
@@ -53,10 +53,14 @@ RUN rm -rf pycuda-*
 
 # sudo権限を持つ一般ユーザーを作成
 ENV USER dev
+ENV GROUP dev
+ENV UID 1000
+ENV GID 1000
 ENV HOME /home/${USER}
 ENV SHELL /bin/bash
 
-RUN useradd -m ${USER}
+RUN groupadd -g ${GID} ${GROUP}
+RUN useradd -u ${UID} -g ${GROUP} -m ${USER}
 RUN gpasswd -a ${USER} sudo
 RUN echo "${USER}:dev" | chpasswd
 RUN sed -i.bak "s#${HOME}:#${HOME}:${SHELL}#" /etc/passwd

@@ -4,11 +4,15 @@
 > https://developer.nvidia.com/nvidia-tensorrt-7x-download <br>
 
 ダウンロードしたTARファイルを、リポジトリ直下へコピー <br>
+## 実行権限の付与
+```
+chmod +x entrypoint.sh
+```
 ## Docker Image のビルド
 ```
 docker build -t {image-name} .
 ```
 ## Dockerコンテナの実行
 ```
-docker run -itd --gpus all -p {port}:22 -p {port}:5000 --shm-size 2g {image-name}
+docker run -itd --gpus all --expose=5000 --shm-size 2g {image-name}
 ```
