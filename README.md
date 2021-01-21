@@ -14,5 +14,5 @@ docker build -t {image-name} .
 ```
 ## Dockerコンテナの実行
 ```
-docker run -itd --gpus all --expose=5000 --shm-size 2g {image-name}
+docker run -itd --gpus all --expose=5000 --shm-size 2g -v {local_pass}:{docker_pass} {image-name}
 ```

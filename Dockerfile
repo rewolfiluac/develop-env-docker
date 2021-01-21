@@ -5,7 +5,7 @@ ENV VERSION 7.2.1-1+cuda11.1
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-    sudo wget curl git openssh-server \
+    sudo wget curl git vim \
     # Python3.7用
     python3.7 python3.7-dev python3.7-distutils \
     build-essential libssl-dev libffi-dev\
@@ -39,7 +39,6 @@ RUN python3.7 -m pip install onnx==1.8.0
 RUN python3.7 -m pip install timm==0.3.2 torch_optimizer==0.0.1a17 addict==2.4.0
 RUN python3.7 -m pip install /usr/local/TensorRT-${TRT_VERSION}/python/tensorrt-${TRT_VERSION}-cp37-none-linux_x86_64.whl \
     /usr/local/TensorRT-${TRT_VERSION}/onnx_graphsurgeon/onnx_graphsurgeon-0.2.6-py2.py3-none-any.whl
-# RUN python3.7 -m pip install hydra-core==1.0.4 --upgrade
 RUN python3.7 -m pip install flake8==3.8.4 autopep8==1.5.4
 
 # PyCUDAインストール
