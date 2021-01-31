@@ -77,10 +77,10 @@ RUN python3.7 -m pip uninstall -y opencv_python opencv_python_headless
 
 # PyCUDAインストール
 WORKDIR /
-RUN curl -OL https://files.pythonhosted.org/packages/46/61/47d3235a4c13eec5a5f03594ddb268f4858734e02980afbcd806e6242fa5/pycuda-2020.1.tar.gz \
+RUN curl -OL https://files.pythonhosted.org/packages/46/61/47d3235a4c13eec5a5f03594ddb268f4858734e02980afbcd806e6242fa5/pycuda-2020.1.tar.gz && \
     tar xfz pycuda-2020.1.tar.gz 
 WORKDIR /pycuda-2020.1 
-RUN python3.7 configure.py --cuda-root=/usr/local/cuda \
+RUN python3.7 configure.py --cuda-root=/usr/local/cuda && \
     make install 
 WORKDIR /
 RUN rm -rf pycuda-*
@@ -88,10 +88,10 @@ RUN rm -rf pycuda-*
 # TensorRTインストール
 WORKDIR /opt
 COPY TensorRT-${TRT_VERSION}*.tar.gz ./
-RUN tar xzvf TensorRT-${TRT_VERSION}*.tar.gz \
-    cp -r TensorRT-${TRT_VERSION} /usr/local/ \
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/TensorRT-${TRT_VERSION}/lib \
-    rm -rf TensorRT-${TRT_VERSION}* \
+RUN tar xzvf TensorRT-${TRT_VERSION}*.tar.gz && \
+    cp -r TensorRT-${TRT_VERSION} /usr/local/ && \
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/TensorRT-${TRT_VERSION}/lib && \
+    rm -rf TensorRT-${TRT_VERSION}* && \
     python3.7 -m pip install /usr/local/TensorRT-${TRT_VERSION}/python/tensorrt-${TRT_VERSION}-cp37-none-linux_x86_64.whl \
     /usr/local/TensorRT-${TRT_VERSION}/onnx_graphsurgeon/onnx_graphsurgeon-0.2.6-py2.py3-none-any.whl
 
@@ -126,10 +126,10 @@ RUN git clone --depth=1 https://github.com/opencv/opencv.git && \
     ldconfig -v
 
 # sudo権限を持つ一般ユーザーを作成
-RUN groupadd -g ${GID} ${GROUP} \
-    useradd -u ${UID} -g ${GROUP} -m ${USER} \
-    gpasswd -a ${USER} sudo \
-    echo "${USER}:dev" | chpasswd \
+RUN groupadd -g ${GID} ${GROUP} && \
+    useradd -u ${UID} -g ${GROUP} -m ${USER} && \
+    gpasswd -a ${USER} sudo && \
+    echo "${USER}:dev" | chpasswd && \
     sed -i.bak "s#${HOME}:#${HOME}:${SHELL}#" /etc/passwd
 
 USER ${USER}
