@@ -13,6 +13,5 @@
 ダウンロードしたTARファイルを、リポジトリ直下へコピー <br>
 ## Docker Image のビルド
 ```
-UID=${UID} GID=${GID} docker-compose build
-docker-compose up
+UID=${UID} GID=${GID} docker-compose up
 ```
