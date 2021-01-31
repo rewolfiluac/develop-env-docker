@@ -14,6 +14,7 @@
 
 ## Docker Image のビルド
 ```
-UID=$(id -u) GID=$(id -g) docker-compose build
+bash make_env.sh
+docker-compose build
 docker-compose up
 ```

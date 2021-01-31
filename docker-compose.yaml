@@ -2,12 +2,14 @@ version: '3'
 services:
   dev:
     container_name: "dev"
+    env_file:
+      - .env
     build:
       context: "."
       dockerfile: "./Dockerfile"
       args:
-        UID: $UID
-        GID: $GID
+        UID: ${UID}
+        GID: ${GID}
     runtime: nvidia
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
