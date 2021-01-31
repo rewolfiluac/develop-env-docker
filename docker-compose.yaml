@@ -1,0 +1,20 @@
+version: '3'
+services:
+  dev:
+    container_name: "dev"
+    user: ${UID}:${GID}
+    build:
+      context: "."
+      dockerfile: "./Dockerfile"
+      args:
+        UID: $UID
+        GID: $GID
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    # ports:
+    #   - "5000:5000"
+    shm_size: "2gb"
+    tty: true
+    # volumes:
+    #   - your/local/path:your/container/path
