@@ -14,6 +14,6 @@
 
 ## Docker Image のビルド
 ```
-UID=${UID} GID=${GID} docker-compose build
+UID=$(id -u) GID=$(id -g) docker-compose build
 docker-compose up
 ```
