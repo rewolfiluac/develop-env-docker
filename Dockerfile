@@ -70,7 +70,7 @@ RUN curl -kL https://bootstrap.pypa.io/get-pip.py | sudo python3.7 && \
     scikit-image==0.17.2 scikit-learn==0.23.2 \
     onnx==1.8.0 \
     timm==0.3.2 torch_optimizer==0.0.1a17 addict==2.4.0 \
-    flake8==3.8.4 autopep8==1.5.4 && \
+    flake8==3.8.4 autopep8==1.5.4 \
     -U git+https://github.com/albumentations-team/albumentations
 # albumentaions でインストールされるので手動削除。
 RUN python3.7 -m pip uninstall -y opencv_python opencv_python_headless
