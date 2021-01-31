@@ -2,11 +2,6 @@ FROM nvidia/cuda:11.1-cudnn8-devel-ubuntu18.04
 
 ARG UID
 ARG GID
-ENV UID ${UID}
-ENV GID ${GID}
-
-RUN echo ${UID}
-RUN echo ${GID}
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV VERSION 7.2.1-1+cuda11.1
