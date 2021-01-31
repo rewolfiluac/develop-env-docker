@@ -63,15 +63,15 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 # Pythonパッケージのインストール
-RUN curl -kL https://bootstrap.pypa.io/get-pip.py | sudo python3.7 \
+RUN curl -kL https://bootstrap.pypa.io/get-pip.py | sudo python3.7 && \
     python3.7 -m pip install numpy \
-    python3.7 -m pip install torch==1.7.1+cu110 torchvision==0.8.2+cu110 torchaudio===0.7.2 -f https://download.pytorch.org/whl/torch_stable.html \
-    python3.7 -m pip install pytorch-lightning==1.1.0 mlflow==1.12.1 gorilla==0.3.0 \
-    python3.7 -m pip install -U git+https://github.com/albumentations-team/albumentations \
-    python3.7 -m pip install scikit-image==0.17.2 scikit-learn==0.23.2 \
-    python3.7 -m pip install onnx==1.8.0 \
-    python3.7 -m pip install timm==0.3.2 torch_optimizer==0.0.1a17 addict==2.4.0 \
-    python3.7 -m pip install flake8==3.8.4 autopep8==1.5.4
+    torch==1.7.1+cu110 torchvision==0.8.2+cu110 torchaudio===0.7.2 -f https://download.pytorch.org/whl/torch_stable.html \
+    pytorch-lightning==1.1.0 mlflow==1.12.1 gorilla==0.3.0 \
+    scikit-image==0.17.2 scikit-learn==0.23.2 \
+    onnx==1.8.0 \
+    timm==0.3.2 torch_optimizer==0.0.1a17 addict==2.4.0 \
+    flake8==3.8.4 autopep8==1.5.4 && \
+    -U git+https://github.com/albumentations-team/albumentations
 # albumentaions でインストールされるので手動削除。
 RUN python3.7 -m pip uninstall -y opencv_python opencv_python_headless
 
