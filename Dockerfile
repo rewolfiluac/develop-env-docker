@@ -6,10 +6,6 @@ ARG GID
 ENV DEBIAN_FRONTEND=noninteractive
 ENV VERSION 7.2.1-1+cuda11.1
 ENV TRT_VERSION 7.2.1.6
-ENV USER dev
-ENV GROUP dev
-ENV HOME /home/${USER}
-ENV SHELL /bin/bash
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -124,11 +120,16 @@ RUN git clone --depth=1 https://github.com/opencv/opencv.git && \
     ldconfig -v
 
 # sudo権限を持つ一般ユーザーを作成
-RUN groupadd -g ${GID} ${GROUP} && \
-    useradd -u ${UID} -g ${GROUP} -m ${USER} && \
-    gpasswd -a ${USER} sudo && \
-    echo "${USER}:dev" | chpasswd && \
-    sed -i.bak "s#${HOME}:#${HOME}:${SHELL}#" /etc/passwd
+ENV USER dev
+ENV GROUP dev
+ENV HOME /home/${USER}
+ENV SHELL /bin/bash
+
+RUN groupadd -g ${GID} ${GROUP}
+RUN useradd -u ${UID} -g ${GROUP} -m ${USER}
+RUN gpasswd -a ${USER} sudo
+RUN echo "${USER}:dev" | chpasswd
+RUN sed -i.bak "s#${HOME}:#${HOME}:${SHELL}#" /etc/passwd
 
 USER ${USER}
 WORKDIR ${HOME}

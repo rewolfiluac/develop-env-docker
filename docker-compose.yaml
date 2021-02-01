@@ -1,6 +1,6 @@
 version: '3'
 services:
-  dev:
+  develop:
     container_name: "dev"
     env_file:
       - .env
