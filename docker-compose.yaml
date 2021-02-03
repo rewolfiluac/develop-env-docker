@@ -17,5 +17,5 @@ services:
     #   - "5000:5000"
     shm_size: "2gb"
     tty: true
-    # volumes:
-    #   - your/local/path:your/container/path
+    volumes:
+      - ~/:/home/dev/
