@@ -38,7 +38,6 @@ RUN apt-get update \
     libxine2-dev \
     libgstreamer1.0-dev \
     libgstreamer-plugins-base1.0-dev \
-    libopencv-highgui-dev \
     ffmpeg \
     # 並列処理と線形代数, OpenCVビルド用
     libtbb-dev \
@@ -94,19 +93,22 @@ RUN git clone --depth=1 https://github.com/opencv/opencv.git && \
     git clone --depth=1 https://github.com/opencv/opencv_contrib.git && \
     cd opencv && mkdir build && cd build && \
     CC=gcc-7 CXX=g++-7 cmake \
-    -D OPENCV_GENERATE_PKGCONFIG=ON \
-    -D WITH_TBB=ON \
     -D CMAKE_BUILD_TYPE=RELEASE \
+    -D OPENCV_GENERATE_PKGCONFIG=ON \
     -D BUILD_EXAMPLES=ON \
+    -D WITH_TBB=ON \
     -D WITH_FFMPEG=ON \
     -D WITH_V4L=ON \
-    -D WITH_OPENGL=ON \
+    -D WITH_OPENCL=ON \
     -D WITH_CUDA=ON \
-    -D CUDA_ARCH_BIN=8.6 \
-    -D CUDA_ARCH_PTX=8.6 \
     -D WITH_CUBLAS=ON \
     -D WITH_CUFFT=ON \
     -D WITH_EIGEN=ON \
+    -D OPENCV_DNN_CUDA=ON \
+    -D ENABLE_FAST_MATH=ON \
+    -D CUDA_ARCH_BIN=8.6 \
+    -D CUDA_ARCH_PTX=8.6 \
+    -D BUILD_opencv_cudaimgproc=ON \
     -D PYTHON3_EXECUTABLE=/usr/bin/python3.7m \
     -D PYTHON3_LIBRARY=/usr/lib/x86_64-linux-gnu/libpython3.7m.so \
     -D PYTHON_INCLUDE_DIR=/usr/include/python3.7m \
@@ -117,6 +119,7 @@ RUN git clone --depth=1 https://github.com/opencv/opencv.git && \
     .. && \
     make all -j$(nproc) && \
     make install && \
+    sudo /bin/bash -c 'echo "/usr/local/lib" >> /etc/ld.so.conf.d/opencv.conf' && \
     ldconfig -v
 
 # sudo権限を持つ一般ユーザーを作成
