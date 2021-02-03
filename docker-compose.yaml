@@ -18,4 +18,5 @@ services:
     shm_size: "2gb"
     tty: true
     volumes:
-      - ~/:/home/dev/
+      - ~/projects:/home/dev/projects
+      - /mnt/ssd1/:/home/dev/ssd1
